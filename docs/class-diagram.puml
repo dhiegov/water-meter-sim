@@ -1,0 +1,55 @@
+@startuml
+' Made with planttext.com
+
+class SimController {
+  int startSimulation(void)
+}
+
+class ConfigManager {
+  - file : std::ifstream
+  - sample_rate : float
+  - pipe_diameter : float
+  - fluid_vel : float
+  - initial_count : float
+  
+  int reload(void);
+}
+
+SimController --> ConfigManager : - config
+
+class WaterMeter {
+  float measureFlow(void)
+  Image sample(int time_ms)
+}
+
+SimController --> WaterMeter: - water_meter
+
+class Display {
+  - bg_img : Image
+  Image assemble(std::string digits)
+}
+
+note top of Display : Image type from raylib\n\
+see https://raylib.com
+
+class Meter {
+  - count_mm3_ : float
+  - seconds_passed : float
+  float measureFlow(Pipe in, Pipe out, int time_ms);
+  int count_m3(void)
+  int count_mm3(void)
+}
+
+class Pipe {
+  # fluid_vel_mps : float
+  # const diameter_mm : float
+  
+  float flow(void)
+}
+
+WaterMeter --> Pipe : - in
+WaterMeter --> Pipe : - out
+WaterMeter --> Meter : - meter
+WaterMeter -left-> Display : - disp
+
+@enduml
