@@ -1,55 +1,70 @@
 @startuml
-' Made with planttext.com
+' Made with https://planttext.com
 
 class SimController {
-  int startSimulation(void)
-}
-
-class ConfigManager {
-  - file : std::ifstream
-  - sample_rate : float
-  - pipe_diameter : float
-  - fluid_vel : float
-  - initial_count : float
+  - n_meters : unsigned int
   
-  int reload(void);
+  SimController(std::string config_file)
+  \\~SimController()
+  + startSim(void) : void 
 }
-
-SimController --> ConfigManager : - config
+SimController "1" *-- "1..n " WaterMeter : - * meters[n]
 
 class WaterMeter {
-  float measureFlow(void)
-  Image sample(int time_ms)
+  - config_path : std::string
+  - dir_path : std::string
+  - file : std::ifstream
+  - update_interval_ms : unsigned int
+  - reload_interval_ms : unsigned int
+
+  WaterMeter(std::string config_file)
+  \~WaterMeter()
+  + startMeter(void) : void
+  - update(int time_ms) : void
+  - reloadConfig(void) : void
 }
+WaterMeter *-- "1" Meter : - meter
+WaterMeter *-right- "1" MyWindow : - window
 
-SimController --> WaterMeter: - water_meter
-
-class Display {
-  - bg_img : Image
-  Image assemble(std::string digits)
+class MyWindow {
+  # bg_img : MyImage
+  # canvas : MyImage
+  # digits_pos : int[4]
+  
+  MyWindow(std::string bg_img_path)
+  {abstract} \~MyWindow()
+  + {abstract} clearCanvas() : void
+  + {abstract} drawDigits(std::string d) : void
+  + {abstract} drawMeter(void) : void
+  + {abstract} exportCanvasToFile(std::string path) : void
+  + {abstract} renderCanvas() : void
+  + {abstract} setDigitsPos(int x1, int y1, int x2, int y2) : void
 }
-
-note top of Display : Image type from raylib\n\
-see https://raylib.com
+note "encapsulates raylib (graphics library)\nsee https://raylib.com" as N1
+MyWindow .up. N1
 
 class Meter {
-  - count_mm3_ : float
-  - seconds_passed : float
-  float measureFlow(Pipe in, Pipe out, int time_ms);
-  int count_m3(void)
-  int count_mm3(void)
+  - count_liters : float
+  - ms_passed : unsigned int
+  
+  Meter(Pipe *in, Pipe *out, int init_count_m3)
+  + measureFlow(Pipe *in, Pipe *out, int time_ms) : void
+  + count_m3(void) : unsigned int {const}
+  + count_mm3(void) : unsigned int {const}
 }
+Meter *-- "1" Pipe : - *in
+Meter *-- "1" Pipe : - *out
 
 class Pipe {
-  # fluid_vel_mps : float
-  # const diameter_mm : float
+  Pipe(float init_flow, float max_flow)
+  # max_flow_rate_lps : float
+  # curr_flow_rate_lps : float
   
-  float flow(void)
+  + flowLps(void) : float {const}
+  + maxFlowLps(void) : float {const}
+  + setFlowLps(float f) : void
 }
-
-WaterMeter --> Pipe : - in
-WaterMeter --> Pipe : - out
-WaterMeter --> Meter : - meter
-WaterMeter -left-> Display : - disp
+note "LPS = liters per second" as N2
+Pipe .right. N2
 
 @enduml

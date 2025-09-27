@@ -1,0 +1,29 @@
+
+' reason: not really needed, when the meter or sim runs initially
+' they have to load it and after each reload it would need to
+' ask its Config component what value is which thing, it's
+' better if both the WaterMeter and SimController configure
+' themselves up and update their own attributes when reloading
+' the config file.
+
+class Config {
+  - file : std::ifstream
+  Config(std::string filename)
+  reload(void) : StatusCode
+}
+class MeterConfig {
+  - in_max_flow : float
+  - out_max_flow : float
+  - initial_count_m3 : float
+}
+class SimConfig {
+  - sample_rate : float
+}
+MeterConfig --|> Config
+SimConfig --|> Config
+
+
+' components
+SimController *-- "1" SimConfig : - config
+
+WaterMeter *-- "1" MeterConfig: - config
