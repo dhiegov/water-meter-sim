@@ -4,12 +4,13 @@
 class Pipe
 {
 private:
-    float fluid_vel_mps;
-    const float diameter_mm;
+    float max_flow_rate_lps;
+    float curr_flow_rate_lps;
 public:
-    Pipe() : fluid_vel_mps(1), diameter_mm(10) {}
-    /* Returns flow rate in mm^3 per second */
-    float flow();
+    Pipe(float init_flow, float max_flow);
+    float flowLps(void) const; // liters per second
+    float maxFlowLps(void) const;
+    void setFlowLps(float f);
 };
 
 #endif

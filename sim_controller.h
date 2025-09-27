@@ -1,17 +1,19 @@
 #ifndef SIM_CONTROLLER_H
 #define SIM_CONTROLLER_H
 
+#include <string>
+
 #include "water_meter.h"
 
 class SimController
 {
 private:
-    float sample_rate;
-    WaterMeter water_meter;
+    int n_meters;
+    WaterMeter *meters[];
 public:
-    SimController() : sample_rate(2) {}
-    SimController(float rate) : sample_rate(rate) {}
-    int startSimulation();
+    SimController(std::string config_file);
+    ~SimController();
+    void startSim(void);
 };
 
 #endif

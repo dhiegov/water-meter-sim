@@ -6,15 +6,16 @@
 class Meter
 {
 private:
-    float count_mm3_;
-    float seconds_passed;
+    float count_liters;
+    unsigned int ms_passed;
+    Pipe *in;
+    Pipe *out;
 public:
-    Meter() : count_mm3_(0), seconds_passed(0) {}
-    /* Calculates how much water passed and increments counter */
-    float measureFlow(Pipe in, Pipe out, float time_ms);
-    /* Returns count without passing time */
-    float count_mm3() const;
-    float count_m3() const;
+    Meter(Pipe *in, Pipe *out, int init_count_m3);
+    /* Calculates how much water passed and increments counters */
+    void measureFlow(Pipe *in, Pipe *out, int time_ms);
+    unsigned int count_m3(void) const;
+    unsigned int count_mm3(void) const;
 };
 
 #endif
