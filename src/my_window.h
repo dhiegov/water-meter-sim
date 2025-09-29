@@ -10,7 +10,8 @@ class MyWindow
 private:
     Image bg_img;
     Image canvas;
-    int digits_pos[4];
+    /* top left corner of cubic meters digits display */
+    int digits_pos[2];
 public:
     MyWindow(std::string bg_img_path);
     virtual ~MyWindow();
@@ -22,7 +23,10 @@ public:
     virtual void exportCanvasToFile(std::string path);
     /* Renders canvas on screen */
     virtual void renderCanvas(void);
-    virtual void setDigitsPos(int x1, int y1, int x2, int y2);
+    /* Top left corner of where the digits start
+       TODO: make padding, font_size, vertical digit offset
+             and cover sizes settable */
+    virtual void setDigitsPos(int x1, int y1);
     /* Returns true when Esc or the window close button is pressed */
     virtual bool shouldClose(void);
 };
