@@ -15,10 +15,11 @@ private:
     std::ifstream file;
     unsigned int update_interval_ms;
     unsigned int reload_interval_ms; // zero means no reload
-    Meter meter;
+    Meter *meter;
     MyWindow *window;
 public:
-    WaterMeter(std::string config_file);
+    WaterMeter();
+    //WaterMeter(std::string config_file);
     ~WaterMeter();
     void startMeter(void);
 private:

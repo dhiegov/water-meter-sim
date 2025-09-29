@@ -16,7 +16,7 @@ Meter::Meter(Pipe *in, Pipe *out, int init_count_m3)
 }
 
 /* Calculates how much water passed and increments counters */
-void Meter::measureFlow(Pipe *in, Pipe *out, int time_ms)
+void Meter::measureFlow(int time_ms)
 {
     this->ms_passed += time_ms;
     double time_s = time_ms / 1000.0d;
