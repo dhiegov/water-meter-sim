@@ -13,7 +13,7 @@ private:
     int digits_pos[4];
 public:
     MyWindow(std::string bg_img_path);
-    virtual ~MyWindow() {}
+    virtual ~MyWindow();
     virtual void clearCanvas();
     /* Returns water meter image with digits on top */
     virtual void drawDigits(std::string d);
@@ -23,6 +23,8 @@ public:
     /* Renders canvas on screen */
     virtual void renderCanvas(void);
     virtual void setDigitsPos(int x1, int y1, int x2, int y2);
+    /* Returns true when Esc or the window close button is pressed */
+    virtual bool shouldClose(void);
 };
 
 #endif
