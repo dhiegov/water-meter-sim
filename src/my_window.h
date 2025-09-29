@@ -3,13 +3,13 @@
 
 #include <string>
 
-struct MyImage;
+#include <raylib.h>
 
 class MyWindow
 {
 private:
-    MyImage bg_img;
-    MyImage canvas;
+    Image bg_img;
+    Image canvas;
     int digits_pos[4];
 public:
     MyWindow(std::string bg_img_path);
