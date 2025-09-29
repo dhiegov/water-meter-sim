@@ -13,11 +13,11 @@ SimController::SimController()
 SimController::~SimController()
 {
     for (int i = 0; i < n_meters; i++) {
-        delete this->meters + i;
+        delete (this->meters + i);
     }
 }
 
 void SimController::startSim(void)
 {
-    this->meters[0].startMeter();
+    this->meters[0]->startMeter();
 }

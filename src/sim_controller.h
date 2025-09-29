@@ -5,18 +5,22 @@
 
 #include "water_meter.h"
 
+/*
 struct SimConfig {
     //std::string file_path,
     std::string meter_config_paths[],
     int n_meters
 };
+*/
+
+#define MAX_METERS 5
 
 class SimController
 {
 private:
-    const int maxMeters = 5;
+    //static const int maxMeters;
     int n_meters;
-    WaterMeter *meters[maxMeters];
+    WaterMeter *meters[MAX_METERS];
 public:
     SimController();
     //SimController(std::string config_file);
