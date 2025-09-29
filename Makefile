@@ -5,10 +5,11 @@ LIBS = -lraylib -lwinmm -lgdi32
 #	$(CXX) -o $@ $^
 
 # for implementing my_window at its branch
-window.exe: main.o
-	$(CXX) -o $@ $^
+window.exe: main.o my_window.o
+	$(CXX) -o $@ $^ $(LIBS)
+	./window.exe
 
-main.o: src/main.cpp my_window.o
+main.o: src/main.cpp
 	$(CXX) -c $^
 
 clean:
@@ -30,4 +31,4 @@ pipe.o: src/pipe.cpp
 	$(CXX) -c $^
 
 my_window.o: src/my_window.cpp
-	$(CXX) -c $^ $(LIBS)
+	$(CXX) -c $^
