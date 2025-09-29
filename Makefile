@@ -1,7 +1,7 @@
 
 LIBS = -lraylib -lwinmm -lgdi32
 
-meter-sim.exe: main.o
+meter-sim.exe: main.o sim_controller.o water_meter.o meter.o pipe.o my_window.o
 	$(CXX) -o $@ $^ $(LIBS)
 
 # for implementing my_window at its branch
