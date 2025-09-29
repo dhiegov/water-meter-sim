@@ -18,9 +18,14 @@ recalls from this project a possible practical application.
 To make the [class diagram][4] ([source][5]), [planttext][2] was used, using the
 [PlantUML language][3].
 
+Water meter [image][7] background was screenshot from [How to use your water
+meter][6] (PDF in brazilian portuguese) from Grupo Águas do Brasil,
+accessed monday, 2025-09-29.
+
 [1]: https://www.cagepa.pb.gov.br/
 [2]: https://planttext.com
 [3]: https://plantuml.com
 [4]: docs/class-diagram.pdf
 [5]: docs/class-diagram.puml
-
+[6]: https://www.grupoaguasdobrasil.com.br/wp-content/uploads/2018/04/como-usar-seu-hidrometro.pdf
+[7]: meter_bg.png
