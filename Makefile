@@ -15,16 +15,16 @@ window.exe: main.o my_window.o
 clean:
 	rm -rf *.o meter-sim.exe window.exe
 
-main.o: src/main.cpp sim_controller.o
+main.o: src/main.cpp
 	$(CXX) -c $^
 
-sim_controller.o: src/sim_controller.cpp water_meter.o
+sim_controller.o: src/sim_controller.cpp
 	$(CXX) -c $^
 
-water_meter.o: src/water_meter.cpp meter.o my_window.o
+water_meter.o: src/water_meter.cpp
 	$(CXX) -c $^
 
-meter.o: src/meter.cpp pipe.o
+meter.o: src/meter.cpp
 	$(CXX) -c $^
 
 pipe.o: src/pipe.cpp
